@@ -1,0 +1,142 @@
+<!--/
+    CartChing Theme / Rogue Light
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="page_title" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_description" --><!-- #IF {{category.description}} --><meta property="og:description" content="{{category.description | html_encode}}" /><!-- #ENDIF --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_image" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
+
+<!-- #BLOCK for="content_area" -->
+	
+
+	<header role="page">
+
+		<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{category.editurl}}">(Edit)</a><!-- #ENDIF -->
+
+		<h1>{{category.name | html_encode}}</h1>
+
+        <!-- #IF {{category.description}} -->
+        <section class="category-description html">{{category.description}}</section>
+        <!-- #ENDIF -->
+
+	</header>
+
+
+
+    <nav class="breadcrumbs">
+        <ol>
+        	<!--
+            <li class="crumb home first"><a href="/shop/">Home</a></li>
+            -->
+            <!-- #IF {{category}} -->
+                <!-- #IF {{category.parents}} -->
+                    <!-- #FOREACH {{pcat in category.parents}} -->
+                        <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
+                    <!-- #NEXT -->
+    
+                <!-- #ENDIF -->
+                <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
+            <!-- #ELSE -->
+                <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
+            <!-- #ENDIF -->
+                        
+        </ol>
+    </nav>
+
+
+
+<!-- #IF {{category.products}} -->
+<!-- #var {{ pagedProducts = category.products | paged(4) }} -->
+
+
+	<section class="products">
+
+
+        <!-- #FOREACH {{product in pagedProducts }} -->
+        <article class="hproduct product {{product.slug}}">
+        
+        	<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{product.editurl}}">(Edit)</a><!-- #ENDIF -->
+            
+            <figure>
+            <a href="{{product.url}}" rel="product"><img src="{{product.image}}-350x350-100.jpg?crop=true" alt="{{product.name | html_encode}}" class="photo" /></a>
+            </figure>
+                        
+            <header><h1><a href="{{product.url}}">{{product.name | html_encode}}</a></h1></header>
+
+			<section>
+
+                <p class="price">
+                    <!-- #IF {{product.onsale}} -->
+                    <del><span class="currency">{{store.currency_sign}}</span><span class="dollars">{{product.fullprice | money_dollars}}</span><!-- #IF {{product.fullprice | money_cents}} --><span class="cents">.{{product.fullprice | money_cents}}</span><!-- #ENDIF --></del>
+                    <!-- #ENDIF -->
+                    <span class="currency">{{store.currency_sign}}</span><span class="dollars">{{product.price | money_dollars}}</span><!-- #IF {{product.price | money_cents}} --><span class="cents">.{{product.price | money_cents}}</span><!-- #ENDIF -->
+                </p>
+                
+                <p class="excerpt">{{product.excerpt | html_encode}}</p>
+	
+    		</section>
+
+            <footer>
+
+                <div class="social addthis">
+                    <div class="addthis_toolbox addthis_default_style" addthis:url="{{store.url}}{{product.url}}" addthis:title="{{product.title}}" addthis:description="{{product.excerpt | html_encode}}">
+                    <!--
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a class="addthis_button_tweet"></a>
+                    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+                    -->
+                    <a class="addthis_counter addthis_pill_style"></a>
+                    </div>
+                </div>
+
+                <!-- <p class="fn url"><a href="{{product.url}}">Buy &rarr;</a></p> -->
+                
+            </footer>
+
+        </article>
+        <!--#NEXT -->
+
+        <div class="clear"></div>
+
+
+
+        <!-- #IF {{pagedproducts.pages}} -->
+        <section class="paging category bottom">
+        	<nav>
+            {{ pagedProducts | pager }}
+            </nav>
+        </section>
+        <!-- #ENDIF -->
+
+
+	</section>
+
+
+
+
+
+
+<!-- #ELSE -->        
+        
+    
+    <h2>There are no items for <strong>{{category.name | html_encode}}</strong></h2>
+    <p>However you might find something else your looking for on our store.</p>
+    <p><a href="{{store.url}}" class="continue" title="Continue shopping">Continue shopping</a></p>                 
+    
+                                
+<!-- #ENDIF -->
+
+
+
+<!-- #ENDBLOCK -->
+
+
+
+
+<!-- #BLOCK for="script_content" -->
+<!-- #ENDBLOCK -->

@@ -1,0 +1,127 @@
+<!--/
+    CartChing Theme / Rogue Light
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="page_title" -->
+<title>{{store | html_encode}}</title>    
+<!-- #ENDBLOCK -->
+
+<!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
+
+<!-- #BLOCK for="content_area" -->
+	
+
+	<header role="page">
+
+
+        <!-- #IF {{customer.loggedin}} -->
+        
+            <h1>Welcome back <em>{{customer.firstname}}</em>!</h1>
+            <p>Update your <a href="/account/">Account</a>, or manage your <a href="/orders/">Orders</a>.</p>
+        
+            <!-- #IF {{snippets.customer-welcome-message}} -->
+            <div class="customer-welcome-message">
+                {{snippets.customer-welcome-message}}
+            </div>    
+            <!-- #ENDIF -->
+        
+        
+        <!-- #ELSE -->
+
+
+            <h1>Shop</h1>
+
+
+            <!-- #IF {{snippets.shop-page-message}} -->
+            <div class="shop-page-message">
+                {{snippets.shop-page-message}}
+            </div>    
+            <!-- #ENDIF -->
+
+        
+            <!-- #IF {{snippets.shop-page-callout}} -->
+            <div class="list_carousel shop-page-carousel">
+                <div id="shop-page-carousel">
+                    {{snippets.shop-page-callout}}
+                </div>
+    
+                <div class="clearfix"></div>
+    
+                <a id="prev" href="#"><span>prev</span></a>
+                <a id="next" href="#"><span>next</span></a>
+                <div class="pagination" id="pagination"></div>
+    
+            </div>
+            <!-- #ELSE -->
+                <!-- 
+                //	SNIPET - Home Page Callout ..... Image Slider
+                // Instructions.
+                // - Add Links, Images / <p><a href="http://"><img src="http://" alt="" title="" /></a></p>
+                -->
+            <!-- #ENDIF -->
+        
+    
+        <!-- #ENDIF -->    
+
+
+	</header>
+
+
+
+
+	<section class="products">
+
+
+        <!--#FOREACH {{product in products.all | shuffle | pick(8) }} -->
+        <article class="hproduct product {{product.slug}}">
+        
+        	<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{product.editurl}}">(Edit)</a><!-- #ENDIF -->
+            
+            <figure>
+            <a href="{{product.url}}" rel="product"><img src="{{product.image}}-350x350-100.jpg?crop=true" alt="{{product.name | html_encode}}" class="photo" /></a>
+            </figure>
+                        
+            <header><h1><a href="{{product.url}}">{{product.name | html_encode}}</a></h1></header>
+
+			<section>
+
+                <p class="price">
+                    <!-- #IF {{product.onsale}} -->
+                    <del><span class="currency">{{store.currency_sign}}</span><span class="dollars">{{product.fullprice | money_dollars}}</span><!-- #IF {{product.fullprice | money_cents}} --><span class="cents">.{{product.fullprice | money_cents}}</span><!-- #ENDIF --></del>
+                    <!-- #ENDIF -->
+                    <span class="currency">{{store.currency_sign}}</span><span class="dollars">{{product.price | money_dollars}}</span><!-- #IF {{product.price | money_cents}} --><span class="cents">.{{product.price | money_cents}}</span><!-- #ENDIF -->
+                </p>
+                
+                <p class="excerpt">{{product.excerpt | html_encode}}</p>
+	
+    		</section>
+        
+            
+            <footer>
+
+                <div class="social addthis">
+                    <div class="addthis_toolbox addthis_default_style" addthis:url="{{store.url}}{{product.url}}" addthis:title="{{product.title}}" addthis:description="{{product.excerpt | html_encode}}">
+                    <a class="addthis_counter addthis_pill_style"></a>
+                    </div>
+                </div>
+
+                <!-- <p class="fn url"><a href="{{product.url}}">Buy &rarr;</a></p> -->
+                
+            </footer>
+
+        </article>
+        <!--#NEXT -->
+
+        <div class="clear"></div>
+
+	</section>
+
+
+
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="script_content" --><!-- #ENDBLOCK -->

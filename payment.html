@@ -1,0 +1,187 @@
+<!--/
+    CartChing Theme / Rogue Light
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="head_content" -->
+<meta name="robots" content="noindex, nofollow" />
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="content_area" -->
+	
+
+	<header role="page">
+
+		<h1>Payment <span class="amount">/ <span class="currency">{{store.currency_sign}}</span><span class="dollars">{{cart.totalprice | money_dollars}}</span><!-- #IF {{cart.totalprice | money_cents}} --><span class="cents">.{{cart.totalprice | money_cents}}</span><!-- #ENDIF --> 
+        
+        <!--
+        <abbr class="currency" title="{{store.currency_name}}">{{store.currency}}</abbr>
+        -->
+        
+        </span></h1>
+         
+        <ol class="progress checkout">
+            <li id="checkoutprogress-cart" class="completed"><a href="/cart/" title="Your Items">Your Cart</a> <span>→</span></li>
+            <li id="checkoutprogress-checkout" class="completed"><a href="/checkout/" title="Shipping Details">Shipping</a> <span>→</span></li>
+            <li id="checkoutprogress-payment" class="active">Payment <span>→</span></li>
+            <li id="checkoutprogress-receipt"><span title="Receipt">Receipt</span></li>
+        </ol>
+
+	</header>
+
+
+
+
+    <form action="/payment" method="post">
+
+        
+        <fieldset id="payment-method" class="payment-method">
+            <legend>Payment Options</legend>
+
+                <div id="paypal" class="method">
+                    <label title="Paypal &amp; Credit Card">
+                    <input type="radio" name="paymentmethod" value="paypal" class="radio" title="Paypal &amp; Credit Card" /> Paypal &amp; Credit Card</label>
+
+                    <div class="payment-info">
+                        <h3>Pay with Paypal</h3>
+                        <p>Payments with Paypal are safe, secure &amp; encrypted, you don't need a paypal account to use &amp; your details are never stored.</p>
+                        <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/general/how-to-use-paypal-outside" target="_blank">What is Paypal?</a></p>
+                    </div>
+
+                </div>
+
+                <!-- #IF {{snippets.payment-methods}} -->
+    
+                      {{snippets.payment-methods}}
+    
+                <!-- #ELSE -->
+    
+                    <div id="email" class="method">
+                        <label title="Email Inquiry Order">
+                        <input type="radio" name="paymentmethod" value="email_order" class="radio" title="Email Inquiry Order" /> Email Order</label>
+    
+                        <div class="payment-info">
+                            <h3>Email Order</h3>            
+                            <p>We understand that paying online can be a little daunting for some people, and we are happy for you to place your order without payment and we will get you back to complete the purchase.</p>
+                        </div>
+    
+                    </div>
+    
+                <!-- #ENDIF -->
+    
+        </fieldset>
+        <!--// payment-method --> 
+           
+    
+    
+        <table id="cartitems">
+    
+            <thead>
+                <tr>
+                    <th class="" colspan="2">Item</th>
+                    <th class="price">Price</th>
+                    <th class="qty">Qty</th>
+                    <th class="money">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- #FOREACH {{cartitem in cart.items}} --> 
+                <tr>
+                    <td class="image">
+                        <div class="product-image">
+                        <a href="{{cartitem.url}}" title="{{cartitem.name | html_encode}}">
+                            <img src="{{cartitem.image}}-50x50.jpg?crop=true" alt="{{cartitem.name | html_encode}}" />
+                        </a>
+                        </div>
+                    </td>
+                    <td class="details">
+                        <strong><a href="{{cartitem.url}}">{{cartitem.name | html_encode}}</a></strong>
+                        <!-- #IF {{cartitem.hasvariation}} -->
+                        <br />{{cartitem.variation.name | html_encode}}
+                        <!-- #ENDIF -->
+                    </td>
+                    <td class="price">{{cartitem.price | money}}</td>
+                    <td class="qty">{{cartitem.quantity}}</td>
+                    <td class="money">{{cartitem.qtyprice | money}}</td>
+                </tr>
+                <!-- #NEXT -->
+            </tbody>
+    
+            <tfoot>
+    
+                <tr class="subtotal">
+                  <td colspan="4"><strong>Subtotal</strong> <!-- #IF {{cart.taxesincluded}} -->(incl. tax)</strong><!-- #ELSE --><strong>(ex. tax)<!-- #ENDIF --></td>
+                  <td class="money">{{cart.subtotal | money}}</td>
+                </tr>
+    
+                <!-- #IF {{cart.shippingrequired}} -->
+    
+                    <!-- #IF {{cart.shippingaddress.country}} -->
+                    <!-- // show carrier and pricing -->
+    
+                    <tr class="shipping">
+                      <td colspan="4"><small>Shipping with <strong>{{cart.shipping.carrier}}</strong>.</small> | Shipping/Handling</td>
+                      <td class="money">{{cart.shipping.cost | money}}</td>
+                    </tr>
+    
+                    <!-- #ELSE -->
+                    <!-- // no shipping required -->
+    
+                    <tr class="shipping">
+                      <td colspan="4"><small>Delivery - No Shipping Required.</small></td>
+                      <td class="money"></td>
+                    </tr>
+    
+                    <!-- #ENDIF -->
+    
+                <!-- #ELSE -->
+                <!-- #ENDIF -->                                        
+    
+                <!-- #IF {{cart.coupon}} -->
+                <tr class="coupon">
+                  <td colspan="4"><em>{{cart.coupon.name}}</em> | Discount <strong>({{cart.discount.percentage}}%)</strong></td>
+                  <td class="money">{{cart.discount.amount | money}}</td>
+                </tr>
+                <!-- #ENDIF -->
+    
+                <tr class="total">
+                  <td colspan="4"><strong>Total</strong> <abbr class="currency" title="{{store.currency_name}}">{{store.currency}}</abbr></td>
+                  <td class="money">{{cart.totalprice | money}}</td>
+                </tr>
+    
+                <!-- #IF {{cart.taxesincluded}} -->
+                <tr class="tax">
+                  <td colspan="4">Includes Tax ({{cart.tax.percentage}}%)</td>
+                  <td class="money">{{cart.tax.amount | money}}</td>
+                </tr>
+                <!-- #ENDIF -->
+    
+                
+            </tfoot>
+        </table>
+
+
+
+
+        
+        <div class="actions payment">
+            <button type="submit" class="button submit" title="Place Your Order">Place Your Order</button>
+        </div>
+
+
+    </form>
+
+
+
+
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="footer_social" --> <!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="script_content" -->
+<!-- #ENDBLOCK -->

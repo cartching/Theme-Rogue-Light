@@ -1,0 +1,68 @@
+<!--/
+    CartChing Theme / Rogue Light
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme.html" -->
+
+
+<!-- #BLOCK for="content_area" -->
+	
+	<header role="page">
+
+        <h1>Orders History</h1>
+
+	</header>
+
+
+
+    <!-- #IF {{orders}} -->
+    
+        <div class="orderlist">
+        <table>
+            <thead>
+                <tr>
+                    <td>Invoice No.</td>
+                    <td>Order Date</td>
+                    <td>Payment Type</td>
+                    <td>No. Of Items</td>
+                    <td>Total</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- #FOREACH {{ order in orders }} -->
+                <tr>
+                    <td><a href="{{order.url}}"><strong>{{order.number}}</strong></a></td>
+                    <td>{{order.placed | datetime}}</td>
+                    <td><span class="{{order.payment.method|uppercase}}">{{order.payment.method|uppercase}}</span></td>
+                    <td>{{order.items.count}} Item(s)</td>
+                    <td>{{order.totalprice | money}}</span><sup>{{order.currencycode}}</sup></td>
+                    <td><span class="status">{{order.status}}</span></td>
+                </tr>
+                <!-- #NEXT -->
+            </tbody>
+        </table>
+        </div>
+        
+    <!-- #ELSE -->
+    
+        <h2>You haven't made any orders yet!</h2>
+        <p><a href="{{store.url}}" class="continue" title="Continue shopping">Continue shopping</a></p>
+    
+    <!-- #ENDIF -->
+
+
+
+
+
+
+
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="footer_social" --> <!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="script_content" -->
+<!-- #ENDBLOCK -->

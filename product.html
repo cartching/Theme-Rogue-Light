@@ -1,0 +1,354 @@
+<!--/
+    CartChing Theme / Rogue Light
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="page_title" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_description" --><meta property="og:description" content="{{product.excerpt | html_encode}}" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_image" --><!-- #IF {{product.image}} --><meta property="og:image" content="{{store.url}}{{product.image}}-200x320.jpg" /><!-- #ENDIF --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="/themes/rogue-light/files/jquery.lightbox-0.5.css" media="screen" /><!-- #ENDBLOCK -->
+
+<!-- #BLOCK for="content_area" -->
+
+
+	<header role="page">
+
+		<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{product.editurl}}">(Edit)</a><!-- #ENDIF -->
+
+		<h1 class="product-title">{{product.name | html_encode}}</h1>
+
+        <section class="paging product">
+    
+            <!-- #IF {{product.previous}} -->
+                <a class="page prev" href="{{product.previous.url}}" title="{{product.previous.name}} / {{product.previous.price | money}}">« Previous</a>
+            <!-- #ENDIF -->
+        
+            <!-- #IF {{product.next}} -->
+                <a class="page next" href="{{product.next.url}}" title="{{product.next.name}} / {{product.next.price | money}}">Next »</a>
+            <!-- #ENDIF -->
+    
+        </section>
+
+	</header>
+
+
+
+
+    <nav class="breadcrumbs">
+        <ol>
+        
+        	<!--
+            <li class="crumb home first"><a href="/shop/">Home</a></li>
+        	-->
+            
+            <!-- #IF {{category}} -->
+                <!-- #IF {{category.parents}} -->
+                    <!-- #FOREACH {{pcat in category.parents}} -->
+                        <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
+                    <!-- #NEXT -->
+    
+                <!-- #ENDIF -->
+                <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
+            <!-- #ELSE -->
+                <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
+            <!-- #ENDIF -->
+
+        </ol>
+    </nav>
+
+
+
+	<section class="product">
+    
+    	<article>
+
+
+            <!-- #IF {{product.image}} -->
+            <section class="product-images">
+
+                <figure>
+                    <div class="product-image"><img class="photo" src="{{product.image}}-500x750.jpg" alt="{{product.name | html_encode}} / {{product.price | money}}" /></div>
+                </figure>
+
+                <ul class="product-image-thumbnails" id="gallery">
+                    <!-- #FOREACH {{image in product.images}} -->
+                    <li><a title="{{product.name | html_encode}} - {{product.price | money}}" href="{{image.url}}-1024x1024-90.jpg"><img src="{{image.url}}-70x70-75.jpg?crop=true" alt="{{image.title | html_encode}}" class="photo" /></a></li>
+                    <!-- #NEXT -->
+                </ul>
+
+            </section>
+            <!-- #ENDIF -->
+
+
+
+			<section class="product-details">
+
+                <p class="price">
+                
+					<span class="retail">
+	                    <span class="currency"><sup>{{store.currency_sign}}</sup></span><span class="dollars">{{product.price | money_dollars}}</span><!-- #IF {{product.price | money_cents}} --><span class="cents">.{{product.price | money_cents}}</span><!-- #ENDIF -->
+    				</span>
+
+                    <!-- #IF {{product.onsale}} -->
+                    <span class="sale">was <del><span class="currency"><sup>{{store.currency_sign}}</sup></span><span class="dollars">{{product.fullprice | money_dollars}}</span>
+                        <!-- #IF {{product.fullprice | money_cents}} --><span class="cents">.{{product.fullprice | money_cents}}</span><!-- #ENDIF -->
+                    </del></span>
+                    <!-- #ENDIF -->
+                
+                </p>
+    
+                <!-- #IF {{ cart.taxesincluded }} -->
+                <p class="product-tax"><span class="inctax">incl. tax</span></p>
+                <!-- #ENDIF -->
+    
+
+    			<div class="social addthis">
+                    <div class="addthis_toolbox addthis_default_style" addthis:url="{{store.url}}{{product.url}}" addthis:title="{{product.name | html_encode}}" addthis:description="{{product.excerpt | html_encode}}">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a class="addthis_button_tweet"></a>
+                    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+                    <a class="addthis_counter addthis_pill_style"></a>
+                    </div>
+				</div>
+                
+                <div class="social ratings"><script type="text/javascript">SetRatingWidget("star")</script></div>
+
+
+			<!-- #IF {{product.soldout}} -->
+
+    
+                    <!-- // SINGLE VARIAION ONLY #################################### -->
+                    <!-- #IF {{ product.sku }} -->
+					<p><span class="identifier sku"><label class="type"><abbr title="Stock-keeping unit">sku:</abbr></label> <span class="value">{{product.sku | html_encode}}</span></span></p>
+                    <!-- #ENDIF -->
+                    
+                    <p class="product-soldout">Sorry, product is sold out.</p>
+
+    		<!-- #ELSE -->
+
+ 
+				<!-- #IF {{product.disabled}} -->
+
+					<div class="product-disabled">
+                        <h5>This product is currently not available.</h5>
+                        <p>Please <a href="/contact/">email</a> us if you're interested in this product.</p>
+					</div>
+
+
+                        <!-- #IF {{product.variations}} -->
+    
+                            <!-- #FOREACH {{ variation in product.variations }} -->
+                            <p class="variation">
+                            	
+                                <!-- // TO FIX ################################################## -->
+                                <!-- <strong>{{variation}}:</strong> -->
+                                <!-- // TO FIX ################################################## -->
+
+                                <strong>Option:</strong> <!-- #FOREACH {{ option in variation.options }} -->{{option | html_encode}}, <!-- #NEXT -->
+                                
+                            </p>
+                            <!-- #NEXT -->
+                
+                        <!-- #ELSEIF {{product.variation}} -->
+    
+                            <ul class="product-variation">
+                                <!-- #FOREACH {{ option in product.variation.options }} -->
+                                <li class="variation option {{ option.soldout | if('soldout','instock') }}">
+                                
+                                    <strong>{{option | html_encode}}</strong>
+
+                                    <!-- #IF {{ option.soldout }} -->
+
+                                    <span class="stocklevel soldout">Sold Out</span>
+
+                                    <!-- #ELSE -->
+
+                                        <!-- # IF { { store.loggedin } } -->
+                                            <!-- #IF {{option.stocklevel}} -->
+                                            <span class="stocklevel"><span class="stockqty">{{option.stocklevel}}</span> <span class="stockdescription">Instock</span></span>
+                                            <!-- #ENDIF -->
+                                        <!-- # ENDIF -->
+                                    
+                                    <!-- #ENDIF -->
+    
+                                    <!-- #IF {{ option.sku }} -->
+                                    <span class="identifier sku"><abbr title="Stock-keeping unit">sku:</abbr> <span class="value">{{option.sku | html_encode}}</span></span>
+                                    <!-- #ENDIF -->
+                                    
+                                </li>
+                                <!-- #NEXT -->
+                            </ul>
+    
+            
+                        <!-- #ENDIF -->
+
+				<!-- #ELSE -->
+
+
+                    <!-- begin product-add -->
+                    <div class="product-add">		
+                    <form action="/cart/add" method="post" id="form-product">
+                    <input type="hidden" name="returnurl" value="{{page.url}}" />
+                    <input type="hidden" name="product" value="{{product.id}}" />
+    
+                        <fieldset>
+                            <legend>Add to Cart</legend>
+                
+                            <ul class="product-variation">
+    
+                            <!-- #IF {{product.variations}} -->
+                            <!-- // COMBINATION OF VARIAIONS #################################### -->
+                            
+                                            
+                                <!-- #FOREACH {{variation in product.variations}} -->
+                                <li class="variations">
+                                
+                                    <!-- // TO FIX ################################################## -->
+                                    <!-- <label>{{variation}}</label> -->
+                                    <!-- // TO FIX ################################################## -->
+                                    
+                                    <select name="variation" class="select">
+                                        <!-- #FOREACH {{option in variation.options}} -->
+                                           <option value="{{option.id}}">{{option | html_encode}}</option>
+                                        <!-- #NEXT -->
+                                    </select>
+                                    
+                                </li>
+                                <!-- #NEXT -->                      
+                                
+                            <!-- #ELSEIF {{product.variation}} -->							
+                            <!-- // MANY VARIAIONS #################################### -->
+                                
+    
+                                <!-- #FOREACH {{option in product.variation.options}} -->
+                                <li class="variation option {{ option.soldout | if('soldout','instock') }}">
+    
+                                    <label>
+                                    <input name="variation" type="radio" value="{{option.id}}" class="radio" {{ option.soldout | if ('disabled','') }} />
+                                    <span>{{option | html_encode}}</span>
+                                    </label>                                    
+    
+                                    <!-- #IF {{ option.soldout }} -->
+
+	                                    <span class="stocklevel soldout">Sold Out</span>
+
+                                    <!-- #ELSE -->
+    
+                                        <!-- #IF {{ option.stocklevel }} -->
+                                        <span class="stocklevel"><span class="stockqty">{{option.stocklevel}}</span> <span class="stockdescription">Instock</span> <!-- #IF {{ store.loggedin }} --><small>({{option.stocklevel}})</small><!-- #ENDIF --></span>
+                                        <!-- #ENDIF -->
+                                    
+                                    <!-- #ENDIF -->
+    
+    
+                                    <!-- #IF {{ option.sku }} -->
+                                    <span class="identifier sku"><abbr title="Stock-keeping unit">sku:</abbr> <span class="value">{{option.sku | html_encode}}</span></span>
+                                    <!-- #ENDIF -->
+    
+                                </li>
+                                <!-- #NEXT -->
+    
+    
+                            <!-- #ELSE -->
+                            <!-- // SINGLE VARIAION ONLY #################################### -->
+    
+                                <li class="variation option single">
+    
+    
+                                    <!-- // TO FIX ################################################## -->
+                                    <!--
+                                    <label>{{variation}}</label> <span class="stocklevel">{{variation.stocklevel}} <em>Instock</em></span>
+                                    <span class="identifier sku"><abbr title="Stock-keeping unit">sku:</abbr> <span class="value">{{variation.sku | html_encode}}</span></span>
+                                    -->
+                                    <!-- // TO FIX ################################################## -->
+                                    
+                                    
+                                    <span class="stocklevel"><span class="stockqty">{{product.stocklevel}}</span> <span class="stockdescription">Instock</span></span>
+                                    
+                                    <!-- #IF {{ product.sku }} -->
+                                    <span class="identifier sku"><abbr title="Stock-keeping unit">sku:</abbr> <span class="value">{{product.sku | html_encode}}</span></span>
+                                    <!-- #ENDIF -->
+                                
+                                </li>
+                                    
+                            <!-- #ENDIF -->
+                                
+                                <li class="quantity">
+                                    <label><abbr title="Quantity">Qty</abbr></label>
+                                    
+                                    <!--
+                                    <input id="quantity" name="quantity" type="text" value="1" maxlength="4" class="text" title="Quantity" />
+									-->
+
+<input class="text number" id="quantity" name="quantity" title="Quantity" type="number" autofocus
+       min="0"
+       max="10"
+       value="1">
+                                    
+                                    
+                                    
+                                </li>
+                                
+                                <li class="buttons">
+                                    <button type="submit" id="addtocart" class="button addtocart" title="Add To Cart">Add To Cart</button>
+        
+                                    <!-- #IF {{cart.items.count}} -->
+                                    <a href="/cart/" class="viewcart" title="View your Shopping Cart">View Cart</a>
+                                    <!-- #ENDIF -->
+                                </li>
+                
+                            </ul>
+                
+                        </fieldset>
+                        </form>
+                        </div>
+                        <!-- end product-add -->
+
+
+                <!-- #ENDIF -->
+
+            
+            <!-- #ENDIF -->
+
+
+
+
+
+
+				<!-- Form -->                
+
+			</section>
+
+
+            <!-- #IF {{product.description}} -->
+            <section class="product-description html">{{product.description}}</section>
+            <!-- #ENDIF -->    
+
+
+			<!-- Product Reviews -->
+            
+            <!-- Product Featured -->
+            
+        
+        </article>
+    
+    </section>
+
+
+
+
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="script_content" -->
+<script type="text/javascript" src="http://SetRating.com/SetRating.js"></script>
+<script type="text/javascript" src="/themes/rogue-light/files/jquery.lightbox-0.5.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#gallery a').lightBox();
+});
+</script>
+<!-- #ENDBLOCK -->

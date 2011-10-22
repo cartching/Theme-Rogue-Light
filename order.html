@@ -1,0 +1,234 @@
+<!--/
+    CartChing Theme / Rogue Light
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme.html" -->
+
+
+<!-- #BLOCK for="page_title" -->
+<title>Invoice #{{order.number}}, Placed on {{order.placed | datetime}} | {{store | html_encode}}</title>    
+<!-- #ENDBLOCK -->
+
+<!-- #BLOCK for="head_content" -->
+<meta name="robots" content="noindex, nofollow" />
+<!-- #ENDBLOCK -->
+
+
+
+<!-- #BLOCK for="content_area" -->
+
+	
+	<header role="page">
+
+		<h1>Invoice #{{order.number}}</h1>
+        <p>Placed on {{order.placed | datetime}}</p>
+
+	</header>
+
+
+
+
+    <div class="personal-details">
+        <h3>Sold To</h3>
+        <ul>
+            <li>
+                <label>Full Name:</label> <span>{{order.customer.name}}</span>
+            </li>
+            <li>
+                <label>Email:</label> <span>{{order.customer.email}}</span>
+            </li>
+            <!-- #IF {{order.customer.phone}} -->
+            <li>
+                <label>Phone:</label> <span>{{order.customer.phone}}</span>
+            </li>
+            <!-- #ENDIF -->
+
+            <!-- #IF {{order.name}} -->
+            <li class="order-name"><label>Order Name:</label> <span>{{order.name}}</span></li>
+            <!-- #ENDIF -->
+
+			<!-- #IF {{order.payment.method}} -->
+            <li class="payment-type">
+              <label>Payment Type:</label> <span>{{order.payment.method | uppercase}}</span>
+            </li>
+            <!-- #ENDIF -->
+
+        </ul>
+    </div>
+
+
+
+
+    <div class="billing-details">
+        <h3>Billing Address</h3>
+        <ul>
+            <li>
+                <label for="address1">Address Line 1:</label>
+                <span>{{order.billingaddress.street}}</span>
+            </li>
+            <!-- #IF {{order.billingaddress.street2}} -->
+            <li>
+                <label for="address2">Address Line 2:</label>
+                <span>{{order.billingaddress.street2}}</span>
+            </li>
+            <!-- #ENDIF -->
+            <li>
+                <label for="city">City:</label>
+                <span>{{order.billingaddress.city}}</span>
+            </li>
+            <li>
+                <label for="state">State/Province/Region:</label>
+                <span>{{order.billingaddress.state}}</span>
+            </li>
+            <li>
+                <label for="country">Country:</label>
+                <span>{{order.billingaddress.country.name}}</span>
+            </li>
+            <li>
+                <label for="postcode">ZIP/Postal Code:</label>
+                <span>{{order.billingaddress.postcode}}</span>
+            </li>
+        </ul>
+    </div>
+    <!-- end billing -->
+    
+    <div class="shipping-details">
+    <h3>Shipping Address</h3>
+        <ul>
+            <li>
+                <label for="address1">Address Line 1:</label>
+                <span>{{order.shippingaddress.street}}</span>
+            </li>
+            <!-- #IF {{order.billingaddress.Street2}} -->
+            <li>
+                <label for="address2">Address Line 2:</label>
+                <span>{{order.shippingaddress.street2}}</span>
+            </li>
+            <!-- #ENDIF -->
+            <li>
+                <label for="city">City:</label>
+                <span>{{order.shippingaddress.city}}</span>
+            </li>
+            <li>
+                <label for="state">State/Province/Region:</label>
+                <span>{{order.shippingaddress.state}}</span>
+            </li>
+            <li>
+                <label for="country">Country:</label>
+                <span>{{order.shippingaddress.country.name}}</span>
+            </li>
+            <li>
+                <label for="postcode">ZIP/Postal Code:</label>
+                <span>{{order.shippingaddress.postcode}}</span>
+            </li>
+        </ul>
+    </div>
+    <!-- end shipping -->
+
+
+
+    <table id="cartitems">
+
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th class="price">Price</th>
+                <th class="qty">Qty</th>
+                <th class="money">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- #FOREACH {{orderitem in order.items}} --> 
+            <tr>
+                <td class="details">
+                  <strong>{{orderitem.name | html_encode}}</strong>
+                  <!-- #IF {{orderitem.hasvariation}} -->
+                  <br />{{orderitem.variation.name | html_encode}}
+                  <!-- #ENDIF -->
+                </td>
+                <td class="price">{{orderitem.price | money}}</td>
+                <td class="qty">{{orderitem.quantity}}</td>
+                <td class="money">{{orderitem.qtyprice | money}}</td>
+            </tr>
+            <!-- #NEXT -->
+        </tbody>
+
+        <tfoot>
+
+            <tr class="subtotal">
+              <td colspan="3"><strong>Subtotal</strong> <!-- #IF {{order.taxesincluded}} -->(incl. tax)</strong><!-- #ELSE --><strong>(ex. tax)<!-- #ENDIF --></td>
+              <td class="money">{{order.subtotal | money}}</td>
+            </tr>
+
+            <!-- #IF {{order.shippingrequired}} -->
+
+                <!-- #IF {{order.shippingaddress.country}} -->
+                <!-- // show carrier and pricing -->
+
+                <tr class="shipping">
+                  <td colspan="3">Shipping &amp; Handling
+                    <br />
+                    <small>Shipping {{order.items.count}} <em>Item(s)</em> to {{order.shippingaddress.country}} <!-- #IF {{order.shippingaddress.postcode}} -->({{order.shippingaddress.postcode}})<!-- #ENDIF -->, with <strong>{{order.shipping.carrier}}</strong>.</small>
+                  </td>
+                  <td class="money">{{order.shipping.cost | money}}</td>
+                </tr>
+
+                <!-- #ELSE -->
+                <!-- // no shipping required -->
+
+                <tr class="shipping">
+                  <td colspan="3"><small>Delivery - No Shipping Required.</small></td>
+                  <td class="money"></td>
+                </tr>
+
+                <!-- #ENDIF -->
+
+            <!-- #ELSE -->
+            <!-- #ENDIF -->                                        
+
+            <!-- #IF {{order.coupon}} -->
+            <tr class="coupon">
+              <td colspan="3"><em>{{order.coupon.name}}</em> | Discount <strong>({{order.discount.percentage}}%)</strong></td>
+              <td class="money">{{order.discount.amount | money}}</td>
+            </tr>
+            <!-- #ENDIF -->
+
+            <tr class="total">
+              <td colspan="3"><strong>Total</strong> <abbr class="currency" title="{{store.currency_name}}">{{store.currency}}</abbr></td>
+              <td class="money">{{order.totalprice | money}}</td>
+            </tr>
+
+            <!-- #IF {{order.taxesincluded}} -->
+            <tr class="tax">
+              <td colspan="3">Includes Tax ({{order.tax.percentage}}%)</td>
+              <td class="money">{{order.tax.amount | money}}</td>
+            </tr>
+            <!-- #ENDIF -->
+            
+        </tfoot>
+    </table>
+
+
+
+    <!-- #IF {{order.comments}} -->
+	<div class="instructions-details">
+   	  <h3>Order Instructions</h3>
+      <p>{{order.comments}}</p>
+    </div>
+    <!-- #ENDIF -->
+
+
+    <div class="actions order">
+        <button type="button" value="Print Order" onclick="window.print();" class="button print" title="Print Order">Print</button>
+    </div>
+
+
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="footer_social" --> <!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="script_content" -->
+<!-- #ENDBLOCK -->

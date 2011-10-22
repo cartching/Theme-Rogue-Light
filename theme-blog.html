@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!--
+        CartChing Theme / Rogue Light
+        Copyright (c) CartChing, 2011 | http://cartching.com
+    -->
+	<!-- #BLOCK name="page_title" --><title>{{page.title | html_encode}} | {{store | html_encode}}</title><!-- #ENDBLOCK -->
+    <meta charset="utf-8"/>
+    <!-- <meta name="viewport" content="width=device-width; initial-scale=1" /> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="title" content="{{store | html_encode}}" />
+    <!-- #IF {{page.keywords}} --><meta name="keywords" content="{{page.keywords | html_encode}}" /><!-- #ENDIF -->
+    <!-- #IF {{page.description}} --><meta name="description" content="{{page.description | html_encode}}" /><!-- #ENDIF -->
+
+    <meta property="og:site_name" content="{{store | html_encode}}" />
+    <meta property="og:url" content="{{page.url}}" />
+    <meta property="og:title" content="{{page.title | html_encode}}" />
+    <!-- #BLOCK name="page_type" --><meta property="og:type" content="blog" /><!-- #ENDBLOCK -->
+    <!-- #BLOCK name="page_description" --><meta property="og:description" content="{{page.description | html_encode}}" /><!-- #ENDBLOCK -->
+	<!-- #BLOCK name="page_image" --><!-- #ENDBLOCK -->
+
+    <link rel="canonical" href="{{page.url}}" />
+    <link rel="home" title="home" href="{{store.url}}" />
+    <link rel="alternate" type="application/rss+xml" title="{{store | html_encode}}'s Blog" href="{{store.url}}/blog.rss" />
+
+	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/reset.css">
+	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/base.css">
+    <link rel="stylesheet" media="all" href="/themes/rogue-light/files/theme.css" />
+    <link rel="stylesheet" media="all" href="{{store.files}}/custom.css" />
+    <!--[if IE]><link rel="stylesheet" media="screen" href="/themes/rogue-light/files/ie.css" /><![endif]-->
+    
+    <script src="/themes/rogue-light/files/head.min.js"></script>
+    <script>
+        head
+            .js(
+				"http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js",
+                "/themes/rogue-light/files/main.js",
+                "http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js",
+                "http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js",
+            	"http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c"
+            )
+    </script>
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- #BLOCK name="head_content" --><!-- #ENDBLOCK -->
+    
+    <!-- #IF {{snippets.head-content}} -->
+    {{snippets.head-content}}
+    <!-- #ELSE -->
+        <!-- // Custom Snippet: Head Content
+            Example -
+            <meta name="google-site-verification" content="" />
+        -->
+    <!-- #ENDIF -->
+
+</head>
+
+
+<!-- #BLOCK name="body_tag" -->    
+<body id="{{page.id}}" class="{{page.id}} {{page.template}} theme-blog">
+<!-- #ENDBLOCK -->
+
+
+<div class="wrap">
+
+
+
+    <!-- #IF {{page.hasmessage}} -->
+    <section class="pagemsg" id="pagemsg">
+        <div class="msg {{page.messagetype|lowercase}}">
+    
+            <!-- #IF {{page.hasmessagetitle}} --><h3>{{page.messagetitle}}</h3><!-- #ENDIF -->
+            <!-- #IF {{page.hasmessagedetails}} --><p>{{page.messagedetails}}</p><!-- #ENDIF -->
+
+            <div class="buttons">
+	            <a href="#" class="close" onClick="$('#pagemsg').fadeOut();" title="Click to Close" rel="nofollow">Close</a>
+			</div>
+    
+        </div>
+    </section>
+    <!-- #ENDIF -->
+
+
+
+    <!-- #IF {{customer.loggedin}} -->
+	<section role="userbar" class="userbar loggedin">
+    	<nav>
+            <ul>
+                <li class="welcome">Welcome, <strong> {{customer.firstname}}!</strong></li>
+                <li class="account"><a href="/account/" rel="nofollow">Account</a></li>
+                <li class="orders"><a href="/orders/" rel="nofollow">Orders</a></li>
+                <!-- #IF {{cart.items.count}} -->
+                <li class="cart"><a href="/cart/" rel="nofollow">Cart / {{cart.totalprice | money}} ({{cart.items.count}} items)</a></li>
+                <!-- #ENDIF -->
+                <li class="signout"><a href="/account/logout?returnurl={{page.url}}" rel="nofollow">Sign Out</a></li>
+            </ul>
+		</nav>
+    </section>
+    <!-- #ELSE -->
+	<section role="userbar" class="userbar signin">
+		<nav>
+        <ul>
+        	<li class="first currency"><abbr class="currency" title="{{store.currency_name}}">{{store.currency}}</abbr></li>
+            <li class="cart"><a href="/cart/" rel="nofollow">Cart / <!-- #IF {{cart.items.count}} -->{{cart.totalprice | money}} ({{cart.items.count}} items)<!-- #ELSE -->{{store.currency_sign}}0<!-- #ENDIF --></a></li>
+            <li class="signin"><a href="/account/" rel="nofollow">Sign In</a> | <a href="/account#create">Create Account</a></li>
+        </ul>
+        </nav>
+        <!-- #IF {{cart.items.count}} -->
+        <!-- #ENDIF -->
+    </section>
+    <!-- #ENDIF -->
+
+
+
+
+    <header class="header" role="masthead">
+
+        <h1 class="logo" title="{{store | html_encode}}"><a href="{{store.url}}">{{store | html_encode}}</a></h1>
+
+        <nav role="navigation" class="navigation">
+            <ul>
+                <!-- #FOREACH {{link in links.nav}} -->
+                <li class="nav-{{link.slug}}"><a href="{{link.url}}" title="{{link.name | html_encode}}">{{link.name | html_encode}}</a></li>
+                <!-- #NEXT -->
+            </ul>
+        </nav>
+
+    </header>
+
+
+
+
+	<section id="content" role="content">
+
+        <!-- #BLOCK name="content_area" -->
+        <!-- #ENDBLOCK -->
+    
+    </section>
+
+
+
+    <aside class="content-aside" role="main">
+
+        <!-- #BLOCK name="aside_area" -->
+        <!-- #ENDBLOCK -->
+
+		<p class="rss"><a href="{{store.url}}/blog.rss">Subscribe via RSS</a></p>
+
+
+        <!-- # IF { { post.category } } -->
+        <!-- # ELSE -->
+        <!-- # ENDIF -->
+
+
+
+        <!-- #IF {{snippets.blog-categories}} -->
+		<section class="blog-categories">
+        {{snippets.blog-categories}}
+        </section>
+        <!-- #ELSE -->
+		<section class="blog-categories">
+        
+        	<!-- // Custom Snippet: Blog Categories -->
+        
+            <h4>Categories</h4>
+            <ul class="nav-categories">
+            <!-- #FOREACH {{ post in blog.articles }} -->
+                <li class="{{post.category.slug}}"><a href="{{post.category.url}}">{{post.category | html_encode}}</a></li>
+            <!-- #NEXT -->
+            </ul>
+        </section>
+        <!-- #ENDIF -->
+
+
+
+        <section class="subscribe">
+
+            <form id="form-subscribe" action="{{store.url}}/mailinglist/subscribe" method="post">
+                <input type="hidden" name="returnurl" value="{{page.url}}" />
+                <fieldset>
+
+					<legend>Newsletter</legend>
+                    
+					<p>Sign up for our newsletter to receive news, delivered weekly to your inbox.</p>
+                                    
+                	<div>
+                    <label>Name</label>
+                    <input type="text" name="name" value="" class="text med required" title="Please provide your Name" />
+					</div>
+
+					<div>
+                    <label>Email</label>
+                    <input type="email" name="email" value="" class="text med required" title="Please provide your Email" />
+    				</div>
+	                <div class="submit">
+                    <button type="submit" class="button submit" title="Click to Subscribe">Join</button>
+                    </div>
+                </fieldset>
+            </form>
+        
+        </section>
+
+
+
+
+        <!-- #IF {{snippets.blog-links}} -->
+        <section class="links social">
+        {{snippets.blog-links}}
+        <div class="clearfix"></div>
+        </section>
+        <!-- #ELSE -->
+        <section class="links social">
+        <!-- // Custom Snippet: Blog Links -->
+
+            <h3>Find us on...</h3>
+            
+            <ul>
+                <li class="link-rss"><a href="{{store.url}}/blog.rss">RSS</a></li>
+            </ul>
+
+            <div class="clearfix"></div>
+
+        </section>
+        <!-- #ENDIF -->
+
+
+
+
+
+    </aside>
+
+    <div class="clearfix"></div>
+
+
+
+
+    <footer class="footer" role="siteinfo">
+
+        <p class="copyright"><a href="{{store.url}}">{{store | html_encode}}</a></p>
+
+        <p class="cite"><small><cite>Copyright <abbr title="Copyright">&#169;</abbr> 2011 <a href="{{store.url}}">{{store | html_encode}}</a>.</cite> All Rights Reserved.</small></p> 
+        
+        <!-- #BLOCK name="footer_social" -->
+        <div class="social addthis">
+            <div class="addthis_toolbox addthis_default_style" addthis:url="{{page.url}}" addthis:title="{{page.title | html_encode}}">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            <a class="addthis_counter addthis_pill_style"></a>
+            </div>
+        </div>
+        <!-- #ENDBLOCK -->
+            
+    </footer>
+
+
+</div>
+
+<!-- #BLOCK name="script_content" -->
+<!-- #ENDBLOCK -->
+
+<!-- #IF {{snippets.script-content}} -->
+{{snippets.script-content}}
+<!-- #ELSE -->
+
+	<!-- // Custom Snippet: Script Content
+
+        	Example -
+	    	Google Anayltics Code <script>...</script>
+    -->
+
+<!-- #ENDIF -->
+
+</body>
+</html>

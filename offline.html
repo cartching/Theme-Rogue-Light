@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!--
+        CartChing Theme / Rogue Light
+        Copyright (c) CartChing, 2011 | http://cartching.com
+    -->
+
+    <title>{{store | html_encode}}</title>
+    
+    <meta charset="utf-8"/>
+    <!-- <meta name="viewport" content="width=device-width; initial-scale=1" /> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="title" content="{{store | html_encode}}" />
+    <!-- #IF {{page.keywords}} --><meta name="keywords" content="{{page.keywords | html_encode}}" /><!-- #ENDIF -->
+    <!-- #IF {{page.description}} --><meta name="description" content="{{page.description | html_encode}}" /><!-- #ENDIF -->
+    
+    <meta property="og:site_name" content="{{store | html_encode}}" />
+    <meta property="og:url" content="{{page.url}}" />
+    <meta property="og:title" content="{{page.title | html_encode}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="{{page.description | html_encode}}" />
+    
+    <link rel="canonical" href="{{page.url}}" />
+    <link rel="home" title="home" href="{{store.url}}" />
+	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/reset.css">
+	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/base.css">
+    <link rel="stylesheet" media="all" href="/themes/rogue-light/files/theme.css" />
+    <link rel="stylesheet" media="all" href="{{store.files}}/custom.css" />
+    <!--[if IE]><link rel="stylesheet" media="screen" href="/themes/rogue-light/files/ie.css" /><![endif]-->
+
+    <!-- #IF {{snippets.head-content}} -->
+    {{snippets.head-content}}
+    <!-- #ELSE -->
+        <!-- // Custom Snippet: Head Content
+            Example -
+            <meta name="google-site-verification" content="" />
+        -->
+    <!-- #ENDIF -->
+
+</head>
+
+
+<body id="{{page.id}}" class="{{page.id}} {{page.template}}">
+
+
+<div class="wrap">
+
+
+
+    <!-- #IF {{page.hasmessage}} -->
+    <section class="pagemsg" id="pagemsg">
+        <div class="msg {{page.messagetype|lowercase}}">
+    
+            <!-- #IF {{page.hasmessagetitle}} --><h3>{{page.messagetitle}}</h3><!-- #ENDIF -->
+            <!-- #IF {{page.hasmessagedetails}} --><p>{{page.messagedetails}}</p><!-- #ENDIF -->
+
+            <div class="buttons">
+	            <a href="#" class="close" onClick="$('#pagemsg').fadeOut();" title="Click to Close">Close</a>
+			</div>
+    
+        </div>
+    </section>
+    <!-- #ENDIF -->
+
+
+
+
+
+    <header class="header" role="masthead">
+
+        <h1 class="logo" title="{{store | html_encode}}"><a href="{{store.url}}">{{store | html_encode}}</a></h1>
+
+        <nav role="navigation" class="navigation">
+            <ul>
+                <li class="nav-"><a href="{{store.url}}" title="">Home</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+
+	<section id="content" role="content">
+
+
+		<h1>We are currently OFFLINE!</h1>
+
+	    <!-- #IF {{page.description}} -->
+	    <p>{{page.description | html_encode}}</p>
+    	<!-- #ENDIF -->
+
+
+    </section>
+
+
+
+    <footer class="footer" role="siteinfo">
+
+        <p class="copyright"><a href="{{store.url}}">{{store | html_encode}}</a></p>
+        <p class="cite"><small><cite>Copyright <abbr>&#169;</abbr> 2011 <a href="{{store.url}}">{{store | html_encode}}</a>.</cite> All Rights Reserved.</small></p> 
+        
+    </footer>
+
+
+</div>
+
+<!-- #IF {{snippets.script-content}} -->
+{{snippets.script-content}}
+<!-- #ELSE -->
+<!-- // Custom Snippet: Script Content
+        Example -
+        Google Anayltics Code <script>...</script>
+-->
+<!-- #ENDIF -->
+</body>
+</html>
