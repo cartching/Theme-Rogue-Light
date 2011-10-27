@@ -7,7 +7,26 @@
 
 <!-- #BLOCK for="page_title" --><!-- #ENDBLOCK -->
 <!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
-<!-- #BLOCK for="page_description" --><meta property="og:description" content="{{article.excerpt | html_encode}}" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_keywords" -->
+<!-- #IF {{article.tags}} -->
+    <meta name="keywords" content="<!-- #FOREACH {{tag in article.tags}} -->{{tag}}, <!-- #NEXT -->" />
+<!-- #ELSE -->
+    <!-- #IF {{page.keywords}} --><meta name="keywords" content="{{page.keywords | html_encode}}" /><!-- #ENDIF -->
+<!-- #ENDIF -->
+<!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_description" -->
+<!-- #IF {{article.excerpt}} -->
+    <!-- #var {{ pagedescription = article.excerpt | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+<!-- #ELSE -->
+    <!-- #IF {{page.description}} -->
+    <!-- #var {{ pagedescription = page.description | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+    <!-- #ENDIF -->
+<!-- #ENDIF -->
+<!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_type" --><meta property="og:type" content="article" /><!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_image" --><!-- #IF {{article.image}} --><meta property="og:image" content="{{store.url}}{{article.image}}-200x320.jpg" /><!-- #ENDIF --><!-- #ENDBLOCK -->
 

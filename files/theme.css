@@ -531,12 +531,9 @@ box-shadow: 1px 1px 2px #F5F5F5;
 .product-add .addtocart {}
 .product-add .viewcart { clear: both; display: block; margin-top: 0.6em; padding: 0.6em 0; border-top: 1px solid #eee; text-align: center; }
 
-
-
 /* ------ */
 /* Cart */
 .fullprice { color:#999; }
-	
 
 /* Progress */
 .progress.checkout { float:right; margin-bottom:1em; }
@@ -546,7 +543,6 @@ box-shadow: 1px 1px 2px #F5F5F5;
 .progress.checkout .active { font-weight: bold; }
 .progress.checkout .active span { font-weight:normal; }
 .progress.checkout .completed, .progress.checkout .completed a { color:#ccc; }
-
 	
 /* Cart Items */
 #cartitems { width:100%; }
@@ -561,26 +557,21 @@ box-shadow: 1px 1px 2px #F5F5F5;
 #cartitems tfoot td.money { text-align:right; }
 #cartitems td.image { width:90px; }
 #cartitems .product-image { padding:2px; background: none repeat scroll 0 0 #fff; border: 1px solid #E5E5E5; box-shadow: 1px 1px 3px #F5F5F5; }
-
 #cartitems th.price,
 #cartitems th.remove,
 #cartitems th.money { width:100px; }
-
 #cartitems th.qty { width:60px; }
 #cartitems tfoot td { padding:2px 6px; }
 #cartitems tfoot tr.update td { border-bottom:1px dashed #ddd; padding-bottom:10px; }
 #cartitems tfoot tr.subtotal td { padding-top:12px; }
 #cartitems tfoot tr.total td { padding-top:8px; padding-bottom:8px; font-weight:bold; font-size:1.05em; }
 #cartitems tfoot tr.total .money { border-top:1px solid #bbb; border-bottom:1px solid #bbb; }
-
 #cartitems button.remove { margin-top:0; font-size: 0.8em; }
-
 
 /* Actions */
 .actions { clear:both; overflow:auto; text-align:right; margin:2em 0; padding:1em 0 0.5em 0; border-top:2px solid #ddd; }
 .actions button.button { display:inline; margin:0; }
 .actions, .actions button.button { font-size:1.125em; }
-
 
 /* Checkout */
 .personal-details,
@@ -659,7 +650,7 @@ fieldset.payment-method { border:none; padding:0; }
 header[role="masthead"] { margin-bottom:25px; overflow:auto; }
 header[role="masthead"] .logo { float:left; width:auto; }
 
-#content { float: right; width: 896px; }
+#content { float:right; width:900px; }
 
 body.offline #content { float:none; width:auto; padding:2em; }
 

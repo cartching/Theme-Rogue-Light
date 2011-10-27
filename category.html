@@ -6,13 +6,25 @@
 <!-- #EXTENDS file="theme.html" -->
 
 <!-- #BLOCK for="page_title" --><!-- #ENDBLOCK -->
-<!-- #BLOCK for="page_description" --><!-- #IF {{category.description}} --><meta property="og:description" content="{{category.description | html_encode}}" /><!-- #ENDIF --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_description" -->
+<!-- #IF {{category.excerpt}} -->
+    <!-- #var {{ pagedescription = category.excerpt | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+<!-- #ELSE -->
+    <!-- #IF {{page.description}} -->
+    <!-- #var {{ pagedescription = page.description | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+    <!-- #ENDIF -->
+<!-- #ENDIF -->
+<!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_image" --><!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
 <!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
 
+
 <!-- #BLOCK for="content_area" -->
-	
 
 	<header role="page">
 

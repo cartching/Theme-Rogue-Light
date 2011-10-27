@@ -11,22 +11,26 @@
     <!-- <meta name="viewport" content="width=device-width; initial-scale=1" /> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="title" content="{{store | html_encode}}" />
-    <!-- #IF {{page.keywords}} --><meta name="keywords" content="{{page.keywords | html_encode}}" /><!-- #ENDIF -->
-    <!-- #IF {{page.description}} --><meta name="description" content="{{page.description | html_encode}}" /><!-- #ENDIF -->
-
+    <!-- #BLOCK name="page_keywords" --><!-- #IF {{page.keywords}} --><meta name="keywords" content="{{page.keywords | html_encode}}" /><!-- #ENDIF --><!-- #ENDBLOCK --> 
+    <!-- #BLOCK name="page_description" -->
+    <!-- #IF {{page.description}} -->
+    <!-- #var {{ pagedescription = page.description | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+    <!-- #ENDIF -->
+    <!-- #ENDBLOCK -->    
     <meta property="og:site_name" content="{{store | html_encode}}" />
     <meta property="og:url" content="{{page.url}}" />
     <meta property="og:title" content="{{page.title | html_encode}}" />
     <!-- #BLOCK name="page_type" --><meta property="og:type" content="blog" /><!-- #ENDBLOCK -->
-    <!-- #BLOCK name="page_description" --><meta property="og:description" content="{{page.description | html_encode}}" /><!-- #ENDBLOCK -->
 	<!-- #BLOCK name="page_image" --><!-- #ENDBLOCK -->
 
     <link rel="canonical" href="{{page.url}}" />
     <link rel="home" title="home" href="{{store.url}}" />
     <link rel="alternate" type="application/rss+xml" title="{{store | html_encode}}'s Blog" href="{{store.url}}/blog.rss" />
 
-	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/reset.css">
-	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/base.css">
+	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/reset.css" />
+	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/base.css" />
     <link rel="stylesheet" media="all" href="/themes/rogue-light/files/theme.css" />
     <link rel="stylesheet" media="all" href="{{store.files}}/custom.css" />
     <!--[if IE]><link rel="stylesheet" media="screen" href="/themes/rogue-light/files/ie.css" /><![endif]-->

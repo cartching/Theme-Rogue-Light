@@ -57,12 +57,16 @@
             </div>
             <!-- #ELSE -->
                 <!-- 
-                //	SNIPET - Home Page Callout ..... Image Slider
-                // Instructions.
-                // - Add Links, Images / <p><a href="http://"><img src="http://" alt="" title="" /></a></p>
+                //	****************************** //
+                	SNIPET
+                    	- Shop Page Callout
+                	Content/Image Slider
+                	<p><a href="http://"><img src="http://" alt="" /></a></p>
+                	Image width:890px
+                //	****************************** //
                 -->
             <!-- #ENDIF -->
-        
+
     
         <!-- #ENDIF -->    
 
@@ -124,4 +128,28 @@
 <!-- #ENDBLOCK -->
 
 
-<!-- #BLOCK for="script_content" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="script_content" -->
+    <!-- #IF {{snippets.shop-page-callout}} -->
+	<script type="text/javascript" language="javascript" src="/themes/blogger-lite/files/jquery.carouFredSel-4.3.3-packed.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(function() {
+            $('#shop-page-carousel').carouFredSel({			
+                items:1,
+                auto: true,
+                // direction   : "up",
+                pagination  : "#pagination",
+    
+                prev: {
+                    button  : "#prev",
+                    key     : "left"	
+                },
+                next: {
+                    button  : "#next",
+                    key     : "right"
+                }
+    
+            });
+        });
+    </script>
+    <!-- #ENDIF -->
+<!-- #ENDBLOCK -->

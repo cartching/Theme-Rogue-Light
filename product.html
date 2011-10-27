@@ -6,13 +6,25 @@
 <!-- #EXTENDS file="theme.html" -->
 
 <!-- #BLOCK for="page_title" --><!-- #ENDBLOCK -->
-<!-- #BLOCK for="page_description" --><meta property="og:description" content="{{product.excerpt | html_encode}}" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_description" -->
+<!-- #IF {{product.excerpt}} -->
+    <!-- #var {{ pagedescription = product.excerpt | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+<!-- #ELSE -->
+    <!-- #IF {{page.description}} -->
+    <!-- #var {{ pagedescription = page.description | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+    <!-- #ENDIF -->
+<!-- #ENDIF -->
+<!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_image" --><!-- #IF {{product.image}} --><meta property="og:image" content="{{store.url}}{{product.image}}-200x320.jpg" /><!-- #ENDIF --><!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
 <!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="/themes/rogue-light/files/jquery.lightbox-0.5.css" media="screen" /><!-- #ENDBLOCK -->
 
-<!-- #BLOCK for="content_area" -->
 
+<!-- #BLOCK for="content_area" -->
 
 	<header role="page">
 
@@ -33,8 +45,6 @@
         </section>
 
 	</header>
-
-
 
 
     <nav class="breadcrumbs">
