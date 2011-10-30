@@ -32,9 +32,6 @@
         <!-- #ELSE -->
 
 
-            <h1>Shop</h1>
-
-
             <!-- #IF {{snippets.shop-page-message}} -->
             <div class="shop-page-message">
                 {{snippets.shop-page-message}}
@@ -47,15 +44,18 @@
                 <div id="shop-page-carousel">
                     {{snippets.shop-page-callout}}
                 </div>
-    
-                <div class="clearfix"></div>
-    
-                <a id="prev" href="#"><span>prev</span></a>
-                <a id="next" href="#"><span>next</span></a>
+
+                <a id="prev" href="#" title="Previous"><span>&lt;</span></a>
+                <a id="next" href="#" title="Next"><span>&gt;</span></a>
                 <div class="pagination" id="pagination"></div>
+
+                <!-- <div class="clearfix"></div> -->
     
             </div>
             <!-- #ELSE -->
+
+            <h1>Shop</h1>
+
                 <!-- 
                 //	****************************** //
                 	SNIPET
@@ -84,10 +84,12 @@
         
         	<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{product.editurl}}">(Edit)</a><!-- #ENDIF -->
             
+            <!-- #IF {{product.image}} -->
             <figure>
             <a href="{{product.url}}" rel="product"><img src="{{product.image}}-350x350-100.jpg?crop=true" alt="{{product.name | html_encode}}" class="photo" /></a>
             </figure>
-                        
+            <!-- #ENDIF -->
+            
             <header><h1><a href="{{product.url}}">{{product.name | html_encode}}</a></h1></header>
 
 			<section>
@@ -129,27 +131,28 @@
 
 
 <!-- #BLOCK for="script_content" -->
-    <!-- #IF {{snippets.shop-page-callout}} -->
-	<script type="text/javascript" language="javascript" src="/themes/blogger-lite/files/jquery.carouFredSel-4.3.3-packed.js"></script>
-    <script type="text/javascript" language="javascript">
-        $(function() {
-            $('#shop-page-carousel').carouFredSel({			
-                items:1,
-                auto: true,
-                // direction   : "up",
-                pagination  : "#pagination",
-    
-                prev: {
-                    button  : "#prev",
-                    key     : "left"	
-                },
-                next: {
-                    button  : "#next",
-                    key     : "right"
-                }
-    
-            });
+<!-- #IF {{snippets.shop-page-callout}} -->
+<script type="text/javascript" language="javascript" src="http://static.store-cdn.com/themes/theme-rogue-dark/files/jquery.carouFredSel-4.3.3-packed.js"></script>
+<script type="text/javascript" language="javascript">
+    $(function() {
+        $('#shop-page-carousel').carouFredSel({			
+            items:1,
+            auto: {
+                  duration: 1000, // the duration of the animation (1 sec)
+                  pauseDuration: 2000, // the time inbetween animations (10 sec)
+                  pauseOnHover: true
+            },
+            pagination  : "#pagination",
+            prev: {
+                button  : "#prev",
+                key     : "left"	
+            },
+            next: {
+                button  : "#next",
+                key     : "right"
+            }
         });
-    </script>
-    <!-- #ENDIF -->
+    });
+</script>
+<!-- #ENDIF -->
 <!-- #ENDBLOCK -->

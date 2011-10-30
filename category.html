@@ -24,7 +24,29 @@
 <!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
 
 
+<!-- #BLOCK for="breadcrumbs" -->
+<nav class="breadcrumbs">
+    <ol>
+        <li class="crumb home first"><a href="/shop/">Home</a></li>
+        <!-- #IF {{category}} -->
+            <!-- #IF {{category.parents}} -->
+                <!-- #FOREACH {{pcat in category.parents}} -->
+                    <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
+                <!-- #NEXT -->
+
+            <!-- #ENDIF -->
+            <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
+        <!-- #ELSE -->
+            <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
+        <!-- #ENDIF -->
+                    
+    </ol>
+</nav>
+<!-- #ENDBLOCK -->
+
+
 <!-- #BLOCK for="content_area" -->
+	
 
 	<header role="page">
 
@@ -39,31 +61,8 @@
 	</header>
 
 
-
-    <nav class="breadcrumbs">
-        <ol>
-        	<!--
-            <li class="crumb home first"><a href="/shop/">Home</a></li>
-            -->
-            <!-- #IF {{category}} -->
-                <!-- #IF {{category.parents}} -->
-                    <!-- #FOREACH {{pcat in category.parents}} -->
-                        <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
-                    <!-- #NEXT -->
-    
-                <!-- #ENDIF -->
-                <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
-            <!-- #ELSE -->
-                <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
-            <!-- #ENDIF -->
-                        
-        </ol>
-    </nav>
-
-
-
 <!-- #IF {{category.products}} -->
-<!-- #var {{ pagedProducts = category.products | paged(4) }} -->
+<!-- #var {{ pagedProducts = category.products | paged(20) }} -->
 
 
 	<section class="products">
@@ -74,9 +73,11 @@
         
         	<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{product.editurl}}">(Edit)</a><!-- #ENDIF -->
             
+            <!-- #IF {{product.image}} -->
             <figure>
             <a href="{{product.url}}" rel="product"><img src="{{product.image}}-350x350-100.jpg?crop=true" alt="{{product.name | html_encode}}" class="photo" /></a>
             </figure>
+	        <!-- #ENDIF -->
                         
             <header><h1><a href="{{product.url}}">{{product.name | html_encode}}</a></h1></header>
 
@@ -97,11 +98,6 @@
 
                 <div class="social addthis">
                     <div class="addthis_toolbox addthis_default_style" addthis:url="{{store.url}}{{product.url}}" addthis:title="{{product.title}}" addthis:description="{{product.excerpt | html_encode}}">
-                    <!--
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                    <a class="addthis_button_tweet"></a>
-                    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-                    -->
                     <a class="addthis_counter addthis_pill_style"></a>
                     </div>
                 </div>

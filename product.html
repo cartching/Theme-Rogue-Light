@@ -21,7 +21,30 @@
 <!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_image" --><!-- #IF {{product.image}} --><meta property="og:image" content="{{store.url}}{{product.image}}-200x320.jpg" /><!-- #ENDIF --><!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
-<!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="/themes/rogue-light/files/jquery.lightbox-0.5.css" media="screen" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="http://static.store-cdn.com/themes/theme-rogue-light/files/jquery.lightbox-0.5.css" media="screen" /><!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="breadcrumbs" -->
+<nav class="breadcrumbs">
+    <ol>
+    
+        <li class="crumb home first"><a href="/shop/">Home</a></li>
+        
+        <!-- #IF {{category}} -->
+            <!-- #IF {{category.parents}} -->
+                <!-- #FOREACH {{pcat in category.parents}} -->
+                    <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
+                <!-- #NEXT -->
+
+            <!-- #ENDIF -->
+            <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
+        <!-- #ELSE -->
+            <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
+        <!-- #ENDIF -->
+
+    </ol>
+</nav>
+<!-- #ENDBLOCK -->
 
 
 <!-- #BLOCK for="content_area" -->
@@ -45,30 +68,6 @@
         </section>
 
 	</header>
-
-
-    <nav class="breadcrumbs">
-        <ol>
-        
-        	<!--
-            <li class="crumb home first"><a href="/shop/">Home</a></li>
-        	-->
-            
-            <!-- #IF {{category}} -->
-                <!-- #IF {{category.parents}} -->
-                    <!-- #FOREACH {{pcat in category.parents}} -->
-                        <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
-                    <!-- #NEXT -->
-    
-                <!-- #ENDIF -->
-                <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
-            <!-- #ELSE -->
-                <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
-            <!-- #ENDIF -->
-
-        </ol>
-    </nav>
-
 
 
 	<section class="product">
@@ -355,10 +354,14 @@
 
 <!-- #BLOCK for="script_content" -->
 <script type="text/javascript" src="http://SetRating.com/SetRating.js"></script>
-<script type="text/javascript" src="/themes/rogue-light/files/jquery.lightbox-0.5.min.js"></script>
+<script type="text/javascript" src="http://static.store-cdn.com/themes/theme-rogue-light/files/jquery.lightbox-0.5.min.js"></script>
 <script type="text/javascript">
 $(function() {
+	// Open Image
 	$('#gallery a').lightBox();
+
+	// Change Stock Value to Text Description
+	$(".stockqty").stockify();
 });
 </script>
 <!-- #ENDBLOCK -->

@@ -22,7 +22,7 @@
     <section class="posts hfeed group" id="main">
 
 
-		<!-- #var {{pagedarticles = blog.articles | paged(2) }} -->
+		<!-- #var {{pagedarticles = blog.articles | paged(10) }} -->
         <!-- # FOREACH { { post in blog.articles | pick(10) } } -->
         <!-- #FOREACH {{ post in pagedarticles }} -->
 
@@ -113,11 +113,11 @@
         <section class="paging blog bottom">
         	<nav>
             <!-- #IF {{pagedarticles.prevpage}} -->
-            <a href="{{pagedarticles.prevpage.url}}" class="page prev">Previous</a>
+            <a href="{{pagedarticles.prevpage.url}}" class="page prev">« Previous</a>
             <!-- #ENDIF -->
     
             <!-- #IF {{pagedarticles.nextpage}} -->
-            <a href="{{pagedarticles.nextpage.url}}" class="page next">Next</a>
+            <a href="{{pagedarticles.nextpage.url}}" class="page next">Next »</a>
             <!-- #ENDIF -->
             </nav>
         </section>

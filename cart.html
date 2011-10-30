@@ -16,17 +16,7 @@
 	<header role="page">
     <!-- #IF {{cart.items}} -->
 
-		<!--
-	        <h1>Cart / <span class="amount">{{cart.totalprice | money_with_currency}}</span></h1>
-		-->
-
-		<h1>Cart <span class="amount">/ <span class="currency">{{store.currency_sign}}</span><span class="dollars">{{cart.totalprice | money_dollars}}</span><!-- #IF {{cart.totalprice | money_cents}} --><span class="cents">.{{cart.totalprice | money_cents}}</span><!-- #ENDIF --> 
-
-        <!--
-        <abbr class="currency" title="{{store.currency_name}}">{{store.currency}}</abbr>
-        -->
-        
-        </span></h1>
+		<h1>Cart <span class="amount">/ <span class="currency">{{store.currency_sign}}</span><span class="dollars">{{cart.totalprice | money_dollars}}</span><!-- #IF {{cart.totalprice | money_cents}} --><span class="cents">.{{cart.totalprice | money_cents}}</span><!-- #ENDIF --></span></h1>
          
         <ol class="progress checkout">
             <li id="progress-cart" class="active">Your Cart <span>→</span></li>
@@ -34,7 +24,6 @@
             <li id="progress-payment"><a href="/payment/" title="Payment Details">Payment</a> <span>→</span></li>
             <li id="progress-receipt"><span title="Receipt">Receipt</span></li>
         </ol>
-
 
     <!-- #ELSE -->
 
@@ -65,11 +54,15 @@
                     <!-- #FOREACH {{cartitem in cart.items}} --> 
                     <tr>
                         <td class="image">
+                        
+	                        <!-- #IF {{cartitem.image}} -->
                         	<div class="product-image">
                             <a href="{{cartitem.url}}" title="{{cartitem.name | html_encode}}">
                                 <img src="{{cartitem.image}}-75x75.jpg?crop=true" alt="{{cartitem.name | html_encode}}" />
                             </a>
                             </div>
+                            <!-- #ENDIF -->
+                            
                         </td>
                         <td class="details">
                             <strong><a href="{{cartitem.url}}">{{cartitem.name | html_encode}}</a></strong>

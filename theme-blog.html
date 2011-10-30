@@ -29,22 +29,19 @@
     <link rel="home" title="home" href="{{store.url}}" />
     <link rel="alternate" type="application/rss+xml" title="{{store | html_encode}}'s Blog" href="{{store.url}}/blog.rss" />
 
-	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/reset.css" />
-	<link rel="stylesheet" media="all" href="/themes/rogue-light/files/base.css" />
-    <link rel="stylesheet" media="all" href="/themes/rogue-light/files/theme.css" />
+	<link rel="stylesheet" media="all" href="/themes/theme-rogue-light/files/reset.css" />
+	<link rel="stylesheet" media="all" href="/themes/theme-rogue-light/files/base.css" />
+    <link rel="stylesheet" media="all" href="/themes/theme-rogue-light/files/theme.css" />
     <link rel="stylesheet" media="all" href="{{store.files}}/custom.css" />
-    <!--[if IE]><link rel="stylesheet" media="screen" href="/themes/rogue-light/files/ie.css" /><![endif]-->
+    <!--[if IE]><link rel="stylesheet" media="screen" href="/themes/theme-rogue-light/files/ie.css" /><![endif]-->
     
-    <script src="/themes/rogue-light/files/head.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="/themes/theme-rogue-light/files/head.min.js"></script>
     <script>
-        head
-            .js(
-				"http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js",
-                "/themes/rogue-light/files/main.js",
-                "http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js",
-                "http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js",
-            	"http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c"
-            )
+		head.js("/themes/theme-rogue-light/files/main.js")
+		.js("http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js")
+		.js("http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js")
+		.js("http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c");
     </script>
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -107,8 +104,11 @@
 		<nav>
         <ul>
         	<li class="first currency"><abbr class="currency" title="{{store.currency_name}}">{{store.currency}}</abbr></li>
+            <!-- #IF {{cart.items.count}} -->
             <li class="cart"><a href="/cart/" rel="nofollow">Cart / <!-- #IF {{cart.items.count}} -->{{cart.totalprice | money}} ({{cart.items.count}} items)<!-- #ELSE -->{{store.currency_sign}}0<!-- #ENDIF --></a></li>
-            <li class="signin"><a href="/account/" rel="nofollow">Sign In</a> | <a href="/account#create">Create Account</a></li>
+                <!-- #ENDIF -->
+            <li class="signin"><a href="/account/" rel="nofollow">Sign In</a></li>
+            <li class="last account"><a href="/account/" rel="nofollow"><a href="/account#create">Create Account</a></li>
         </ul>
         </nav>
         <!-- #IF {{cart.items.count}} -->
@@ -181,7 +181,7 @@
 
         <section class="subscribe">
 
-            <form id="form-subscribe" action="{{store.url}}/mailinglist/subscribe" method="post">
+            <form id="form-subscribe" action="{{store.url}}/mailinglist/subscribe" method="post" validate>
                 <input type="hidden" name="returnurl" value="{{page.url}}" />
                 <fieldset>
 
@@ -191,12 +191,12 @@
                                     
                 	<div>
                     <label>Name</label>
-                    <input type="text" name="name" value="" class="text med required" title="Please provide your Name" />
+                    <input type="text" name="name" value="" class="text med required" title="Please provide your Name" placeholder="Your Full Name" autofocus required />
 					</div>
 
 					<div>
                     <label>Email</label>
-                    <input type="email" name="email" value="" class="text med required" title="Please provide your Email" />
+                    <input type="email" name="email" value="" class="text med required" title="Please provide your Email" placeholder="Your Email" required />
     				</div>
 	                <div class="submit">
                     <button type="submit" class="button submit" title="Click to Subscribe">Join</button>
