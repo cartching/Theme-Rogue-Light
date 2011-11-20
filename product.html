@@ -21,7 +21,7 @@
 <!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_image" --><!-- #IF {{product.image}} --><meta property="og:image" content="{{store.url}}{{product.image}}-200x320.jpg" /><!-- #ENDIF --><!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
-<!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="http://static.store-cdn.com/themes/theme-rogue-light/files/jquery.lightbox-0.5.css" media="screen" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="http://static.store-cdn.com/themes/library/jquery/shadowbox/shadowbox.css" /><!-- #ENDBLOCK -->
 
 
 <!-- #BLOCK for="breadcrumbs" -->
@@ -44,6 +44,18 @@
 
     </ol>
 </nav>
+
+<div class="social addthis">
+    <div class="addthis_toolbox addthis_default_style" addthis:url="{{store.url}}{{product.url}}" addthis:title="{{product.name | html_encode}}" addthis:description="{{product.excerpt | html_encode}}">
+    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+</div>
+
+<div class="social ratings"><script type="text/javascript" src="http://SetRating.com/SetRating.js"></script><script type="text/javascript">SetRatingWidget("star")</script></div>
+
 <!-- #ENDBLOCK -->
 
 
@@ -112,18 +124,6 @@
                 <!-- #IF {{ cart.taxesincluded }} -->
                 <p class="product-tax"><span class="inctax">incl. tax</span></p>
                 <!-- #ENDIF -->
-    
-
-    			<div class="social addthis">
-                    <div class="addthis_toolbox addthis_default_style" addthis:url="{{store.url}}{{product.url}}" addthis:title="{{product.name | html_encode}}" addthis:description="{{product.excerpt | html_encode}}">
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                    <a class="addthis_button_tweet"></a>
-                    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-                    <a class="addthis_counter addthis_pill_style"></a>
-                    </div>
-				</div>
-                
-                <div class="social ratings"><script type="text/javascript">SetRatingWidget("star")</script></div>
 
 
 			<!-- #IF {{product.soldout}} -->
@@ -142,8 +142,12 @@
 				<!-- #IF {{product.disabled}} -->
 
 					<div class="product-disabled">
-                        <h5>This product is currently not available.</h5>
+                    <!-- #IF {{snippets.product-disabled}} -->
+                        {{snippets.product-disabled}}
+                    <!-- #ELSE -->
+                        <h5>This product is not for purchase.</h5>
                         <p>Please <a href="/contact/">email</a> us if you're interested in this product.</p>
+                    <!-- #ENDIF -->
 					</div>
 
 
@@ -353,15 +357,24 @@
 
 
 <!-- #BLOCK for="script_content" -->
-<script type="text/javascript" src="http://SetRating.com/SetRating.js"></script>
-<script type="text/javascript" src="http://static.store-cdn.com/themes/theme-rogue-light/files/jquery.lightbox-0.5.min.js"></script>
+<script src="http://static.store-cdn.com/themes/library/jquery/shadowbox/shadowbox.js"></script>
 <script type="text/javascript">
-$(function() {
-	// Open Image
-	$('#gallery a').lightBox();
 
+// Shadowbox Lightbox
+Shadowbox.init();
+
+$(function() {
+	
 	// Change Stock Value to Text Description
 	$(".stockqty").stockify();
+
+	$("#gallery a").shadowbox({
+		overlayOpacity:	0.9,
+		gallery:        "#gallery a",
+		continuous:     true
+		// counterType:    "skip"
+	});
+
 });
 </script>
 <!-- #ENDBLOCK -->
