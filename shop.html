@@ -9,7 +9,32 @@
 <title>{{store | html_encode}}</title>    
 <!-- #ENDBLOCK -->
 
-<!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="head_content" -->
+<!-- #IF {{snippets.shop-page-callout}} -->
+<script type="text/javascript" language="javascript" src="http://static.store-cdn.com/themes/theme-rogue-dark/files/jquery.carouFredSel-4.3.3-packed.js"></script>
+<script type="text/javascript" language="javascript">
+    $(function() {
+        $('#shop-page-carousel').carouFredSel({			
+            items:1,
+            auto: {
+                  duration: 1000, // the duration of the animation (1 sec)
+                  pauseDuration: 2000, // the time inbetween animations (10 sec)
+                  pauseOnHover: true
+            },
+            pagination  : "#pagination",
+            prev: {
+                button  : "#prev",
+                key     : "left"	
+            },
+            next: {
+                button  : "#next",
+                key     : "right"
+            }
+        });
+    });
+</script>
+<!-- #ENDIF -->
+<!-- #ENDBLOCK -->
 
 <!-- #BLOCK for="content_area" -->
 	
@@ -37,20 +62,16 @@
                 {{snippets.shop-page-message}}
             </div>    
             <!-- #ENDIF -->
-
         
             <!-- #IF {{snippets.shop-page-callout}} -->
             <div class="list_carousel shop-page-carousel">
                 <div id="shop-page-carousel">
                     {{snippets.shop-page-callout}}
                 </div>
-
+				<div class="clearfix"></div>
                 <a id="prev" href="#" title="Previous"><span>&lt;</span></a>
                 <a id="next" href="#" title="Next"><span>&gt;</span></a>
                 <div class="pagination" id="pagination"></div>
-
-                <!-- <div class="clearfix"></div> -->
-    
             </div>
             <!-- #ELSE -->
 
@@ -131,28 +152,4 @@
 
 
 <!-- #BLOCK for="script_content" -->
-<!-- #IF {{snippets.shop-page-callout}} -->
-<script type="text/javascript" language="javascript" src="http://static.store-cdn.com/themes/theme-rogue-dark/files/jquery.carouFredSel-4.3.3-packed.js"></script>
-<script type="text/javascript" language="javascript">
-    $(function() {
-        $('#shop-page-carousel').carouFredSel({			
-            items:1,
-            auto: {
-                  duration: 1000, // the duration of the animation (1 sec)
-                  pauseDuration: 2000, // the time inbetween animations (10 sec)
-                  pauseOnHover: true
-            },
-            pagination  : "#pagination",
-            prev: {
-                button  : "#prev",
-                key     : "left"	
-            },
-            next: {
-                button  : "#next",
-                key     : "right"
-            }
-        });
-    });
-</script>
-<!-- #ENDIF -->
 <!-- #ENDBLOCK -->
