@@ -36,13 +36,7 @@
     <!--[if IE]><link rel="stylesheet" media="screen" href="/themes/theme-rogue-light/files/ie.css" /><![endif]-->
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script src="/themes/theme-rogue-light/files/head.min.js"></script>
-    <script>
-		head.js("/themes/theme-rogue-light/files/main.js")
-		.js("http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js")
-		.js("http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js")
-		.js("http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c");
-    </script>
+    <script src="/themes/theme-rogue-light/files/main.js"></script>
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
     <!-- #BLOCK name="head_content" --><!-- #ENDBLOCK -->
@@ -108,7 +102,9 @@
             <li class="cart"><a href="/cart/" rel="nofollow">Cart / <!-- #IF {{cart.items.count}} -->{{cart.totalprice | money}} ({{cart.items.count}} items)<!-- #ELSE -->{{store.currency_sign}}0<!-- #ENDIF --></a></li>
                 <!-- #ENDIF -->
             <li class="signin"><a href="/account/" rel="nofollow">Sign In</a></li>
+            <!-- #IF {{cart.items.count}} -->
             <li class="last account"><a href="/account/" rel="nofollow"><a href="/account#create">Create Account</a></li>
+            <!-- #ENDIF -->
         </ul>
         </nav>
         <!-- #IF {{cart.items.count}} -->
@@ -164,7 +160,7 @@
         {{snippets.blog-categories}}
         </section>
         <!-- #ELSE -->
-		<section class="blog-categories">
+		<section class="blog-categories" style="display:none;">
         
         	<!-- // Custom Snippet: Blog Categories -->
         
@@ -208,28 +204,13 @@
 
 
 
-
-        <!-- #IF {{snippets.blog-links}} -->
+        <!-- #IF {{snippets.aside}} -->
         <section class="links social">
-        {{snippets.blog-links}}
+        {{snippets.aside}}
         <div class="clearfix"></div>
         </section>
         <!-- #ELSE -->
-        <section class="links social">
-        <!-- // Custom Snippet: Blog Links -->
-
-            <h3>Find us on...</h3>
-            
-            <ul>
-                <li class="link-rss"><a href="{{store.url}}/blog.rss">RSS</a></li>
-            </ul>
-
-            <div class="clearfix"></div>
-
-        </section>
         <!-- #ENDIF -->
-
-
 
 
 
@@ -261,8 +242,11 @@
 
 </div>
 
-<!-- #BLOCK name="script_content" -->
-<!-- #ENDBLOCK -->
+<!-- #BLOCK name="script_content" --><!-- #ENDBLOCK -->
+<script src="http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js"></script>
+<script src="http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js"></script>
+<script src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c"></script>
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 <!-- #IF {{snippets.script-content}} -->
 {{snippets.script-content}}
