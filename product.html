@@ -19,7 +19,7 @@
     <!-- #ENDIF -->
 <!-- #ENDIF -->
 <!-- #ENDBLOCK -->
-<!-- #BLOCK for="page_image" --><!-- #IF {{product.image}} --><meta property="og:image" content="{{store.url}}{{product.image}}-200x320.jpg" /><!-- #ENDIF --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_image" --><!-- #IF {{product.image}} --><meta property="og:image" content="{{product.image}}?w=200&h=320&crop=false" /><!-- #ENDIF --><!-- #ENDBLOCK -->
 <!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
 <!-- #BLOCK for="head_content" --><link rel="stylesheet" type="text/css" href="http://static.store-cdn.com/themes/library/jquery/shadowbox/shadowbox.css" /><!-- #ENDBLOCK -->
 
@@ -91,12 +91,12 @@
             <section class="product-images">
 
                 <figure>
-                    <div class="product-image"><img class="photo" src="{{product.image}}-500x750.jpg" alt="{{product.name | html_encode}} / {{product.price | money}}" /></div>
+                    <div class="product-image"><img class="photo" src="{{product.image}}?w=510&h=750&crop=false" alt="{{product.name | html_encode}} / {{product.price | money}}" /></div>
                 </figure>
 
                 <ul class="product-image-thumbnails" id="gallery">
                     <!-- #FOREACH {{image in product.images}} -->
-                    <li><a title="{{product.name | html_encode}} - {{product.price | money}}" href="{{image.url}}-1024x1024-90.jpg"><img src="{{image.url}}-70x70-75.jpg?crop=true" alt="{{image.title | html_encode}}" class="photo" /></a></li>
+                    <li><a title="{{product.name | html_encode}} - {{product.price | money}}" href="{{image.url}}?w=1024&h=1024&crop=false"><img src="{{image.url}}?w=50&h=50&crop=true" alt="{{image.title | html_encode}}" class="photo" /></a></li>
                     <!-- #NEXT -->
                 </ul>
 
