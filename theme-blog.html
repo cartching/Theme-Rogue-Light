@@ -223,6 +223,18 @@
 
     <footer class="footer" role="siteinfo">
 
+        <!-- #IF {{snippets.footer-navigation}} -->
+        <nav role="footer-navigation" class="footer-navigation">
+	        {{snippets.footer-navigation}}
+        </nav>
+        <!-- #ELSE -->
+        <!-- // Custom Snippet: Footer Navigation
+            <ul>
+                <li class="nav-"><a href="#">Link</a></li>
+            </ul>
+        -->
+        <!-- #ENDIF -->
+
         <p class="copyright"><a href="{{store.url}}">{{store | html_encode}}</a></p>
 
         <p class="cite"><small><cite>Copyright <abbr title="Copyright">&#169;</abbr> 2011 <a href="{{store.url}}">{{store | html_encode}}</a>.</cite> All Rights Reserved.</small></p> 
