@@ -395,16 +395,6 @@ body.shop #content header[role="page"] { border:none; margin:0; padding:0; }
 #content .products article header h1 { margin:0; }
 #content .products article p { font-size:0.75em; }
 #content .products article .excerpt { height:70px; overflow:hidden; }
-#content .products article footer {
-    border-top: 1px dotted #E5E5E5;
-    bottom:0;
-    height:30px;
-    left:0;
-    position:absolute;
-    width:100%;
-}
-#content .products article footer a { border:none; }
-#content .products article footer p { margin:0; padding:5px 10px 1px; }
 
 /* Product */
 #content .product article .product-images { float:left; width:450px; }
