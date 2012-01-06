@@ -153,6 +153,6 @@ form fieldset div input[type="checkbox"], form fieldset div input[type="radio"] 
 
 /* Clear Fix */
 .clear:after, .clearfix:after {content: ".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
-.clear, .clearfix {display: inline-block;}
+.clear, .clearfix {display:block;}
 html[xmlns] .clear, html[xmlns] .clearfix {display: block;}
 * html .clear, * html .clearfix {height:1%;}
