@@ -30,14 +30,16 @@
     <link rel="alternate" type="application/rss+xml" title="{{store | html_encode}}'s Blog" href="{{store.url}}/blog.rss" />
 
 	<link rel="stylesheet" media="all" href="{{theme.files}}/reset.css" />
-	<link rel="stylesheet" media="all" href="{{theme.files}}/base.css?t=v1" />
-    <link rel="stylesheet" media="all" href="{{theme.files}}/theme.css?t=v6" />
+	<link rel="stylesheet" media="all" href="{{theme.files}}/base.css" />
+    <link rel="stylesheet" media="all" href="{{theme.files}}/theme.css" />
     <!-- <link rel="stylesheet" media="all" href="{{store.files}}/custom.css" /> -->
     <link rel="stylesheet" media="all" href="/files/custom.css" />
     <!--[if IE]><link rel="stylesheet" media="screen" href="{{theme.files}}/ie.css" /><![endif]-->
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script src="{{theme.files}}/main.js"></script>
+	<script src="http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js"></script>
+    <script src="http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js"></script>
+    <script src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c"></script>
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
     <!-- #BLOCK name="head_content" --><!-- #ENDBLOCK -->
@@ -206,9 +208,9 @@
 
 
 
-        <!-- #IF {{snippets.aside}} -->
+        <!-- #IF {{snippets.blog-aside}} -->
         <section class="links social">
-        {{snippets.aside}}
+        {{snippets.blog-aside}}
         <div class="clearfix"></div>
         </section>
         <!-- #ELSE -->
@@ -257,10 +259,7 @@
 </div>
 
 <!-- #BLOCK name="script_content" --><!-- #ENDBLOCK -->
-<script src="http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js"></script>
-<script src="http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js"></script>
 <script src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e8387415e31734c"></script>
-<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 <!-- #IF {{snippets.script-content}} -->
 {{snippets.script-content}}
