@@ -229,7 +229,7 @@ nav[role="navigation"] .active { color:#fff; background:#000; }
 
 /* Category Nav */
 .categories ul { margin-left:0; padding-left:0; }
-.categories li { list-style:none; line-height:1em; padding-bottom:0; margin-bottom:0; }
+.categories li { list-style:none; line-height:1em; padding:0.3em 0; margin-bottom:0; }
 .categories a { color:#c00; }
 .categories a:hover { color:#111; }
 .categories .active { display:block; color:#CC0000; padding-left:8px; border-left:4px solid #000; }
