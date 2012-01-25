@@ -7,12 +7,9 @@
  * 
  */
 
-
 // Change Stock Value to Text Description
 // $(".stockqty").stockify();
-
 // $('.stockqty').stockify().parent().show();
-
 
 (function($){
    $.fn.stockify = function() {
@@ -32,18 +29,6 @@
 			if (level == 4 ) text = "";
 			if (level == 5 ) text = "";
 			if (level == 0) text = "None";
-
-/*
-			if (level < 25) text = "Low";
-			if (level >= 25) text = "20+"
-			if (level > 40) text = "";
-			if (level == 1 ) text = "Only 1 left ";
-			if (level == 2 ) text = "2 left ";
-			if (level == 3 ) text = "3 left ";
-			if (level == 4 ) text = "4 left ";
-			if (level == 5 ) text = "5 left ";
-			if (level == 0) text = "None";
-*/
 			$this.text(text);
 
        });
